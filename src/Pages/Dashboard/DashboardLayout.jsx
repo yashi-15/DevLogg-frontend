@@ -7,13 +7,13 @@ import LeftNavBar from './Navbar/LeftNavBar';
 const Dashboard = () => {
     return (
         <>
-                <TopNavBar />
-            <div className='flex'>
-                <div className='flex-2'>
-                <LeftNavBar />
+            <TopNavBar />
+            <div className='flex bg-[#0B0E14]'>
+                <div className='basis-1/8'>
+                    <LeftNavBar />
                 </div>
-                <div className='flex-8'>
-                <Outlet />
+                <div className='basis-7/8'>
+                    <Outlet />
                 </div>
             </div>
         </>

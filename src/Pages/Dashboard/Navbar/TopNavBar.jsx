@@ -3,7 +3,7 @@ import { FaBell, FaUserCircle } from 'react-icons/fa'
 
 const NavBar = () => {
     return (
-        <div className='flex justify-between items-center p-4 bg-[#191C22]'>
+        <div className='absolute w-full flex justify-between items-center p-4 bg-dark'>
             <ul className='flex gap-4 justify-center items-center'>
                 <li className='text-primary mr-4'>DevLogg</li>
                 {/* <li className='text-grey'>Feed</li>
