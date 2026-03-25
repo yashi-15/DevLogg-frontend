@@ -17,7 +17,7 @@ const Feed = () => {
 
   return (
     <div className='flex'>
-      <div className='flex-5 min-h-screen p-5 pt-22'>
+      <div className='flex-5 min-h-screen p-5'>
         {/* post text box */}
         <div className='flex gap-4 rounded-md bg-[#191C22] p-5'>
           <div className='text-white text-4xl'>
@@ -46,10 +46,13 @@ const Feed = () => {
 
         {/* posts */}
         <Post />
+        <Post />
+        <Post />
+        <Post />
 
 
       </div>
-      <div className='flex-2 bg-dark min-h-screen pt-20'>jdsj</div>
+      <div className='hidden md:block flex-2 bg-dark min-h-screen pt-20'>jdsj</div>
     </div>
   )
 }

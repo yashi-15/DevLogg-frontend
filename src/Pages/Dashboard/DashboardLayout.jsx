@@ -1,22 +1,30 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Outlet } from "react-router";
-import Feed from './Feed/Feed'
+import { Outlet } from "react-router";
 import TopNavBar from './Navbar/TopNavBar'
 import LeftNavBar from './Navbar/LeftNavBar';
 
 const Dashboard = () => {
     return (
-        <>
-            <TopNavBar />
-            <div className='flex bg-[#0B0E14]'>
-                <div className='basis-1/8'>
+        <div>
+            <div class="h-screen overflow-hidden hidden md:flex flex-col">
+                <TopNavBar />
+                <div class="flex-1 flex overflow-hidden">
                     <LeftNavBar />
-                </div>
-                <div className='basis-7/8'>
-                    <Outlet />
+                    <main class="flex-1 overflow-y-auto">
+                        <Outlet />
+                    </main>
                 </div>
             </div>
-        </>
+            <div class="h-screen overflow-hidden md:hidden flex flex-col">
+                <TopNavBar />
+                <div class="grow overflow-y-auto">
+                    <main class="flex-1">
+                        <Outlet />
+                    </main>
+                </div>
+                <LeftNavBar />
+            </div>
+        </div>
     )
 }
 

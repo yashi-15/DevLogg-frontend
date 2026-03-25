@@ -6,10 +6,10 @@ const Header = () => {
         <div className='flex justify-between items-center p-5'>
             <ul className='flex gap-4 justify-center items-center'>
                 <li className='text-primary mr-4'>DevLogg</li>
-                <li className='text-grey'>Feed</li>
-                <li className='text-grey'>Inbox</li>
-                <li className='text-grey'>Search</li>
-                <li className='text-grey'>Bookmarks</li>
+                <li className='text-grey hidden md:block'>Feed</li>
+                <li className='text-grey hidden md:block'>Inbox</li>
+                <li className='text-grey hidden md:block'>Search</li>
+                <li className='text-grey hidden md:block'>Bookmarks</li>
             </ul>
 
             <ul className='flex gap-4 justify-center items-center'>

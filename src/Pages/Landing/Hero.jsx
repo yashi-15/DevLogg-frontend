@@ -15,7 +15,7 @@ const Hero = () => {
                     <button className='px-3 py-2 rounded-sm bg-[#272A31] text-white'>Explore Projects</button>
                 </div>
             </div>
-            <div className='flex-1'>
+            <div className='hidden md:block flex-1'>
                 <div className='bg-black rounded-sm'>
                     
                 </div>
