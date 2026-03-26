@@ -6,6 +6,7 @@ import SignIn from './Pages/SignIn/SignIn'
 import Dashboard from './Pages/Dashboard/DashboardLayout';
 import Feed from './Pages/Dashboard/Feed/Feed';
 import Inbox from './Pages/Dashboard/Inbox/Inbox';
+import {ConvoBox, DefaultConvoBox} from './Pages/Dashboard/Inbox/ConvoBox';
 
 function App() {
 
@@ -17,7 +18,10 @@ function App() {
 
         <Route path='/dashboard' element={<Dashboard />} >
           <Route path='/dashboard/feed' element={<Feed />} />
-          <Route path='/dashboard/inbox' element={<Inbox />} />
+          <Route path='/dashboard/inbox' element={<Inbox />} >
+            <Route index element={<DefaultConvoBox />} />
+            <Route path='/dashboard/inbox/:id' element={<ConvoBox />} />
+          </Route>
         </Route>
 
       </Routes>

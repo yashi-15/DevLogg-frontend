@@ -6,19 +6,19 @@ import LeftNavBar from './Navbar/LeftNavBar';
 const Dashboard = () => {
     return (
         <div>
-            <div class="h-screen overflow-hidden hidden md:flex flex-col">
+            <div className="h-screen overflow-hidden hidden md:flex flex-col">
                 <TopNavBar />
-                <div class="flex-1 flex overflow-hidden">
+                <div className="flex-1 flex overflow-hidden">
                     <LeftNavBar />
-                    <main class="flex-1 overflow-y-auto">
+                    <main className="flex-1 overflow-y-auto">
                         <Outlet />
                     </main>
                 </div>
             </div>
-            <div class="h-screen overflow-hidden md:hidden flex flex-col">
+            <div className="h-screen overflow-hidden md:hidden flex flex-col">
                 <TopNavBar />
-                <div class="grow overflow-y-auto">
-                    <main class="flex-1">
+                <div className="grow overflow-y-auto">
+                    <main className="flex-1 h-full">
                         <Outlet />
                     </main>
                 </div>
