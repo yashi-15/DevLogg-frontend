@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { MdLockOutline, MdMailOutline, MdTerminal } from 'react-icons/md'
+import { NavLink } from 'react-router'
 
 const SignIn = () => {
 
@@ -9,17 +10,17 @@ const SignIn = () => {
     return (
         <div className='h-screen max-w-[80%] mx-auto flex flex-col gap-2 items-center justify-center'>
             <div className='min-w-[90%] md:min-w-120'>
-                <div className='text-primary text-center'>
+                <NavLink to={"/"} className='text-primary text-center'>
                     <div className='w-min p-2 rounded-sm mx-auto text-3xl bg-[#272A31]'>
                         <MdTerminal />
                     </div>
                     <h1 className='mt-4 mb-2 text-xl md:text-3xl font-semibold'>DevLogg</h1>
                     <p className='text-lightgrey mb-8 text-sm md:text-base'>Design. Connect. Build. Ship.</p>
-                </div>
+                </NavLink>
                 <div className='bg-[#191C22]'>
                     <div className='flex border-b border-[#32353C]'>
-                        <div className={`flex-1 text-center cursor-pointer p-4 text-sm md:text-base ${!newAccount ? "border-b-2 border-primary text-primary" : "text-lightgrey"}`} onClick={()=> setNewAccount(false)}>Sign In</div>
-                        <div className={`flex-1 text-center cursor-pointer p-4 text-sm md:text-base ${newAccount ? "border-b-2 border-primary text-primary" : "text-lightgrey"}`} onClick={()=> setNewAccount(true)}>Create Account</div>
+                        <div className={`flex-1 text-center cursor-pointer p-4 text-sm md:text-base ${!newAccount ? "border-b-2 border-primary text-primary" : "text-lightgrey"}`} onClick={() => setNewAccount(false)}>Sign In</div>
+                        <div className={`flex-1 text-center cursor-pointer p-4 text-sm md:text-base ${newAccount ? "border-b-2 border-primary text-primary" : "text-lightgrey"}`} onClick={() => setNewAccount(true)}>Create Account</div>
                     </div>
                     <div className='p-8'>
                         <button className='text-white bg-[#32353C] flex gap-2 p-3 w-full items-center justify-center rounded-md text-xs md:text-base'> <span><svg className='w-4 md:w-5 h-4 md:h-5' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">

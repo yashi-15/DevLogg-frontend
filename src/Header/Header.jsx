@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaBell, FaUserCircle } from "react-icons/fa";
+import {NavLink} from 'react-router'
 
 const Header = () => {
     return (
@@ -19,7 +20,7 @@ const Header = () => {
                 <li className='text-grey'>
                     <FaUserCircle />
                 </li>
-                <li><button className='w-22 px-3 py-2 rounded-sm bg-black text-white'>Sign In</button></li>
+                <li><NavLink to={'/signin'} className='w-22 px-3 py-2 rounded-sm bg-black text-white'>Sign In</NavLink></li>
                 <li><button className='w-22 px-3 py-2 rounded-sm bg-linear-to-r from-primary to-secondary text-black'>Post</button></li>
 
             </ul>
