@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router";
+import { Toaster } from 'react-hot-toast';
 import Header from './Header/Header'
 import Landing from './Pages/Landing/Landing'
 import SignIn from './Pages/SignIn/SignIn'
@@ -25,6 +26,7 @@ function App() {
         </Route>
 
       </Routes>
+      <Toaster />
     </BrowserRouter>
   )
 }

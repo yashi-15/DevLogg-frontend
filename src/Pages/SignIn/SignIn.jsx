@@ -1,15 +1,49 @@
 import React, { useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { MdLockOutline, MdMailOutline, MdTerminal } from 'react-icons/md'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import AnimationWrapper from '../../Animation/AnimationWrapper'
+import apiClient from '../../axios/axios'
+import { notify } from '../../toast/toaster'
 
 const SignIn = () => {
 
+    const navigate = useNavigate()
+
     const [newAccount, setNewAccount] = useState(false)
 
+    const [fullName, setFullName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const onSubmit = async () => {
+        if (newAccount) {
+            try {
+                const response = await apiClient.post("/auth/register", {
+                    fullName, email, password
+                })
+                notify('success', response.data.message)
+                navigate("/dashboard/feed")
+
+            } catch (error) {
+                notify('error', error.response.data.error)
+            }
+        } else {
+            try {
+                const response = await apiClient.post("/auth/login", {
+                    email, password
+                })
+                notify('success', response.data.message)
+                navigate("/dashboard/feed")
+
+            } catch (error) {
+                notify('error', error.response.data.error)
+            }
+        }
+    }
+
     return (
-        <AnimationWrapper keyValue={newAccount? "sign-up" : "sign-in"}>
+        <AnimationWrapper keyValue={newAccount ? "sign-up" : "sign-in"}>
             <div className='h-screen max-w-[80%] mx-auto flex flex-col gap-2 items-center justify-center'>
                 <div className='min-w-[90%] md:min-w-120'>
                     <NavLink to={"/"} className='text-primary text-center'>
@@ -31,54 +65,34 @@ const SignIn = () => {
 
                             <p className='text-lightgrey font-light text-[10px] md:text-xs text-center my-5'>OR CONTINUE WITH</p>
 
-                            {!newAccount ? <div>
-                                <div className='my-3'>
-                                    <p className='text-lightgrey font-light text-[12px] md:text-xs mb-2'>EMAIL ADDRESS</p>
-                                    <div className='bg-[#0B0E14] rounded-md flex gap-2 items-center p-3'>
-                                        <span className='text-lightgrey'><MdMailOutline /></span>
-                                        <input name='email' type='email' placeholder='dev@logg.io' className='text-white focus:outline-none' />
-                                    </div>
-                                </div>
-                                <div className='my-3'>
-                                    <div className='flex gap-2 justify-between items-center'>
-                                        <p className='text-lightgrey font-light text-[12px] md:text-xs mb-2'>PASSWORD</p>
-                                        <p className='text-lightgrey font-light text-[12px] md:text-xs mb-2'>FORGOT?</p>
-                                    </div>
-                                    <div className='bg-[#0B0E14] rounded-md flex gap-2 items-center p-3'>
-                                        <span className='text-lightgrey'><MdLockOutline /></span>
-                                        <input name='password' type='password' placeholder='••••••' className='text-white focus:outline-none' />
-                                    </div>
-                                </div>
-
-                                <button className='px-3 py-2 w-full rounded-md font-semibold bg-linear-to-r from-primary to-secondary text-black my-3'>Sign In to Dashboard</button>
-                            </div> : <div>
-                                <div className='my-3'>
+                            <div>
+                                {newAccount && <div className='my-3'>
                                     <p className='text-lightgrey font-light text-xs mb-2'>FULL NAME</p>
                                     <div className='bg-[#0B0E14] rounded-md flex gap-2 items-center p-3'>
                                         <span className='text-lightgrey'><FaRegUser /></span>
-                                        <input name='text' type='name' placeholder='Dev Logg' className='text-white focus:outline-none' />
+                                        <input value={fullName} onChange={(e) => setFullName(e.target.value)} name='text' type='name' placeholder='Dev Logg' className='text-white focus:outline-none' />
                                     </div>
-                                </div>
+                                </div>}
                                 <div className='my-3'>
                                     <p className='text-lightgrey font-light text-xs mb-2'>EMAIL ADDRESS</p>
                                     <div className='bg-[#0B0E14] rounded-md flex gap-2 items-center p-3'>
                                         <span className='text-lightgrey'><MdMailOutline /></span>
-                                        <input name='email' type='email' placeholder='dev@logg.io' className='text-white focus:outline-none' />
+                                        <input value={email} onChange={(e) => setEmail(e.target.value)} name='email' type='email' placeholder='dev@logg.io' className='text-white focus:outline-none' />
                                     </div>
                                 </div>
                                 <div className='my-3'>
                                     <div className='flex gap-2 justify-between items-center'>
                                         <p className='text-lightgrey font-light text-xs mb-2'>PASSWORD</p>
-                                        <p className='text-lightgrey font-light text-xs mb-2'>FORGOT?</p>
+                                        {!newAccount && <p className='text-lightgrey font-light text-xs mb-2'>FORGOT?</p>}
                                     </div>
                                     <div className='bg-[#0B0E14] rounded-md flex gap-2 items-center p-3'>
                                         <span className='text-lightgrey'><MdLockOutline /></span>
-                                        <input name='password' type='password' placeholder='••••••' className='text-white focus:outline-none' />
+                                        <input value={password} onChange={(e) => setPassword(e.target.value)} name='password' type='password' placeholder='••••••' className='text-white focus:outline-none' />
                                     </div>
                                 </div>
 
-                                <button className='px-3 py-2 w-full rounded-md font-semibold bg-linear-to-r from-primary to-secondary text-black my-3'>Sign In to Dashboard</button>
-                            </div>}
+                                <button onClick={onSubmit} className='px-3 py-2 w-full rounded-md font-semibold bg-linear-to-r from-primary to-secondary text-black my-3'>Sign In to Dashboard</button>
+                            </div>
                         </div>
                     </div>
                 </div>
