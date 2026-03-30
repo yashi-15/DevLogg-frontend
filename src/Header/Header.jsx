@@ -14,15 +14,8 @@ const Header = () => {
             </ul>
 
             <ul className='flex gap-4 justify-center items-center'>
-                <li className='text-grey'>
-                    <FaBell />
-                </li>
-                <li className='text-grey'>
-                    <FaUserCircle />
-                </li>
-                <li><NavLink to={'/signin'} className='w-22 px-3 py-2 rounded-sm bg-black text-white'>Sign In</NavLink></li>
-                <li><button className='w-22 px-3 py-2 rounded-sm bg-linear-to-r from-primary to-secondary text-black'>Post</button></li>
-
+                <li><NavLink to={'/signin'} className='w-16 md:w-22 px-3 py-2 rounded-sm bg-black text-white text-sm md:text-base'>Sign In</NavLink></li>
+                <li><button className='w-16 md:w-22 px-3 py-2 rounded-sm bg-linear-to-r from-primary to-secondary text-black text-sm md:text-base'>Post</button></li>
             </ul>
         </div>
     )

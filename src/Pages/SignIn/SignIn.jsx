@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { MdLockOutline, MdMailOutline, MdTerminal } from 'react-icons/md'
 import { NavLink, useNavigate } from 'react-router'
-import AnimationWrapper from '../../Animation/AnimationWrapper'
-import apiClient from '../../axios/axios'
-import { notify } from '../../toast/toaster'
+import AnimationWrapper from '../../utils/animation/AnimationWrapper'
+import { notify } from '../../utils/toast/toaster'
+import { authLogin, authRegister } from '../../api/auth'
 
 const SignIn = () => {
 
@@ -17,28 +17,13 @@ const SignIn = () => {
     const [password, setPassword] = useState("")
 
     const onSubmit = async () => {
-        if (newAccount) {
-            try {
-                const response = await apiClient.post("/auth/register", {
-                    fullName, email, password
-                })
-                notify('success', response.data.message)
-                navigate("/dashboard/feed")
+        try {
+            const data = newAccount ? await authRegister({ fullName, email, password }) : await authLogin({ email, password })
+            notify('success', data.message)
+            navigate("/dashboard/feed")
 
-            } catch (error) {
-                notify('error', error.response.data.error)
-            }
-        } else {
-            try {
-                const response = await apiClient.post("/auth/login", {
-                    email, password
-                })
-                notify('success', response.data.message)
-                navigate("/dashboard/feed")
-
-            } catch (error) {
-                notify('error', error.response.data.error)
-            }
+        } catch (error) {
+            notify('error', error.response.data.error)
         }
     }
 
