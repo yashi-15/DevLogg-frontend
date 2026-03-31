@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { MdLockOutline, MdMailOutline, MdTerminal } from 'react-icons/md'
-import { NavLink, useNavigate } from 'react-router'
+import { Navigate, NavLink } from 'react-router'
 import AnimationWrapper from '../../utils/animation/AnimationWrapper'
 import { notify } from '../../utils/toast/toaster'
 import { authLogin, authRegister } from '../../api/auth'
+import { UserContext } from '../../context/UserContext'
 
 const SignIn = () => {
-
-    const navigate = useNavigate()
+    const {userAuth, setUserAuth} = useContext(UserContext)
 
     const [newAccount, setNewAccount] = useState(false)
 
@@ -16,19 +16,40 @@ const SignIn = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const resetFeilds = () => {
+        setFullName("")
+        setEmail("")
+        setPassword("")
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     const onSubmit = async () => {
+        const requiredFields = newAccount ? [fullName, email, password] : [email, password]
+        if(requiredFields.some(field => !field)){
+            notify('error', 'All fields are necessary')
+            return;
+        }
+        if (newAccount && fullName.length < 3) {
+            notify('error', 'Full name must be atlease 3 letters long')
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            notify('error', 'Enter a valid email')
+            return;
+        }
         try {
             const data = newAccount ? await authRegister({ fullName, email, password }) : await authLogin({ email, password })
+            resetFeilds()
             notify('success', data.message)
-            navigate("/dashboard/feed")
-
-        } catch (error) {
-            notify('error', error.response.data.error)
+        }
+        catch (error) {
+            notify('error', error?.response?.data?.error || 'Something went wrong')
         }
     }
 
     return (
-        <AnimationWrapper keyValue={newAccount ? "sign-up" : "sign-in"}>
+        userAuth.access_token ? <Navigate to='/dashboard/feed' /> : <AnimationWrapper keyValue={newAccount ? "sign-up" : "sign-in"}>
             <div className='h-screen max-w-[80%] mx-auto flex flex-col gap-2 items-center justify-center'>
                 <div className='min-w-[90%] md:min-w-120'>
                     <NavLink to={"/"} className='text-primary text-center'>
