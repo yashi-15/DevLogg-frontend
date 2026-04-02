@@ -4,7 +4,7 @@ import { MdLockOutline, MdMailOutline, MdTerminal } from 'react-icons/md'
 import { Navigate, NavLink } from 'react-router'
 import AnimationWrapper from '../../utils/animation/AnimationWrapper'
 import { notify } from '../../utils/toast/toaster'
-import { authLogin, authRegister } from '../../api/auth'
+import { authLogin, authRegister, googleAuth } from '../../api/auth'
 import { UserContext } from '../../context/UserContext'
 import { authWithGoogle } from '../../common/firebase'
 
@@ -52,7 +52,14 @@ const SignIn = () => {
 
     const handleGoogleAuth = (e) => {
         e.preventDefault()
-        authWithGoogle().then(user => console.log(user)).catch((err) => notify('error', 'Trouble login with google'));
+
+        authWithGoogle().then(user => {
+           googleAuth({access_token: user.accessToken}).then((data) => {
+            setUserAuth(data.data)
+            notify('success', data.message)
+
+        }).catch((error) => notify('error', error?.response?.data?.error || 'Something went wrong') )
+        }).catch((err) => notify('error', 'Trouble login with google'));
         
     }
 

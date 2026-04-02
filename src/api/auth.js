@@ -15,3 +15,9 @@ export const authLogin = async (data) => {
     storeInSession('user', JSON.stringify(response.data.data))    
     return response.data
 }
+
+export const googleAuth = async (data) => {
+    const response = await apiClient.post('/auth/google-auth', {...data})
+    storeInSession('user', JSON.stringify(response.data.data))    
+    return response.data
+}
