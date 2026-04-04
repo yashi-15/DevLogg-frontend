@@ -1,40 +1,16 @@
 import React, { useState } from 'react'
-import { FaCode, FaUserCircle } from 'react-icons/fa'
-import { MdOutlineImage, MdOutlinePoll } from "react-icons/md";
 import Post from '../../../components/Post';
-
-
+import PostTextBox from '../../../components/PostTextBox';
 
 const Feed = () => {
 
   const [selectedFilter, setSelectedFilter] = useState("latestPosts")
 
-  const handleTextareaChange = (e) =>{
-    let textarea = e.target;
-    textarea.style.height = "auto"
-    textarea.style.height = textarea.scrollHeight + "px"    
-  }
-
   return (
     <div className='flex'>
       <div className='flex-5 min-h-screen p-5'>
         {/* post text box */}
-        <div className='flex gap-4 rounded-md bg-[#191C22] p-5'>
-          <div className='text-white text-4xl'>
-            <FaUserCircle />
-          </div>
-          <div className='grow'>
-            <textarea className='w-full h-20 resize-none outline-none text-white placeholder:opacity-70 p-1' placeholder='Share an architectural insight or a snippet...' onChange={handleTextareaChange} />
-            <div className='flex gap-2 justify-between items-center mt-2'>
-              <div className='flex items-center gap-3'>
-                <div className='flex gap-1 justify-center items-center text-lightgrey text-xs md:text-sm cursor-pointer'><span><FaCode /></span><span>SNIPPET</span></div>
-                <div className='flex gap-1 justify-center items-center text-lightgrey text-xs md:text-sm cursor-pointer'><span><MdOutlineImage /></span><span>MEDIA</span></div>
-                <div className='flex gap-1 justify-center items-center text-lightgrey text-xs md:text-sm cursor-pointer'><span><MdOutlinePoll /></span><span>POLL</span></div>
-              </div>
-              <button className='px-2 py-1 md:px-4 md:py-2 bg-primary text-sm font-semibold rounded-sm'>Publish</button>
-            </div>
-          </div>
-        </div>
+        <PostTextBox />
 
         {/* filters */}
         <div className='my-6 flex gap-1 md:gap-3'>
