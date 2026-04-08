@@ -54,7 +54,7 @@ const PostTextBox = () => {
                     <div className='absolute top-0 right-0 text-white z-10 p-2 rounded-full bg-dark' onClick={handleDeleteImage}>
                         <MdDeleteOutline />
                     </div>
-                    <img src={imgUrl} className='w-full' />
+                    <img src={imgUrl.secure_url} className='w-full' />
                     </div>}
                 <div className='flex gap-2 justify-between items-center mt-2'>
                     <div className='flex items-center gap-3'>
